@@ -8,6 +8,11 @@
 
 import random
 import time
+from colorama import init, Fore, Back, Style
+
+init()
+
+print("Hello " + Fore.RED + "World!")
 
 
 def printIntro():
@@ -115,15 +120,23 @@ def playSnowballFight(players):
         victim = getVictim(players, thrower)
         hitResult = getHitResult()
 
+        survives1 = Fore.YELLOW + thrower + " throws at " + victim + " and hits, " + Fore.YELLOW + " but " + victim + " survies!" 
+        survives2 = Fore.YELLOW + thrower + " tries to hit " + victim + " ...and does! But the snowball bounces off and " + victim + " survies!"
+        surviveMessages = [survives1, survives2]
+
+        OUT1 = Fore.RED + thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game"
+        OUT2 = Fore.RED + thrower + " throws and crushes " + victim + " - " + victim + " has been ELIMINATED!"
+        OUTMessages = [OUT1, OUT2]
+
         if(hitResult == True):
             koResult = random.randint(1, 2)
             if (koResult == 1):
-                print(thrower + " throws at " + victim + " and hits, but " + victim + " survives!")
+                print(random.choice(surviveMessages))
             else:
-                print(thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game")
+                print(Fore.RED + thrower + " throws and absolutely destroys " + victim + " - " + victim + " is out of the game")
                 players.remove(victim)
         else:
-            print(thrower + " throws at " + victim + " but has really bad aim and misses. ")
+            print(Fore.GREEN + thrower + " throws at " + victim + " but has really bad aim and misses. ")
         time.sleep(3)        
 
 def printOutro(winner):
